@@ -50,18 +50,19 @@ textarea {
   font-size: 1.2rem;
   text-align: center; }
 
+.book-card__author {
+  text-align: center; }
+
 .book-card__status {
   width: 80%;
   text-align: center;
   margin-top: auto;
   justify-self: end;
   border: 1px solid grey;
+  background-color: rgba(255, 0, 0, 0.533);
   border-radius: 5px; }
 
 .read {
   background-color: rgba(0, 128, 0, 0.538); }
-
-.not-read {
-  background-color: rgba(255, 0, 0, 0.533); }
 
 /*# sourceMappingURL=styles.css.map */
