@@ -1,0 +1,5 @@
+.book-card {
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+}
