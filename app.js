@@ -4,6 +4,7 @@ const ADD_BOOK_BUTTON = document.querySelector('.add-book__button');
 const BACKDROP = document.querySelector('.backdrop');
 const MODAL = document.querySelector('.new-book__modal');
 const LIBRARY_CONTAINER = document.getElementById('library-container');
+let bookStatusButton;
 
 // basic functions to add books to myLibrary array and display library
 let Book = function (title, author, status) {
@@ -25,7 +26,8 @@ for (const Book of myLibrary) {
   }
 };
 
-// Open add book form
+
+// Open add book form and visuals
 const closeModal = () => {
   BACKDROP.style.display = 'none';
   MODAL.style.display = 'none';
@@ -39,8 +41,72 @@ const openModal = () => {
 ADD_BOOK_BUTTON.addEventListener('click', () => openModal());
 BACKDROP.addEventListener('click', () => closeModal());
 
+
+
+// Get book data from the form, then create a card for the book
+function getBookData (form) {
+  let bookTitle = form.title.value;
+  let bookAuthor = form.author.value;
+  let bookStatus = form.status.checked;
+  let addedBook = new Book (bookTitle, bookAuthor, bookStatus);
+  myLibrary.push(addedBook);
+  const BOOK_CARD = document.createElement('div'); // create book card
+  BOOK_CARD.classList.add('book-card');
+  LIBRARY_CONTAINER.appendChild(BOOK_CARD);
+  const BOOK_CARD_TITLE = document.createElement('div'); // add book title div
+  BOOK_CARD_TITLE.classList.add('book-card__title');
+  BOOK_CARD_TITLE.textContent = addedBook.title;
+  BOOK_CARD.appendChild(BOOK_CARD_TITLE);
+  const BOOK_CARD_AUTHOR = document.createElement('div'); // add book author div
+  BOOK_CARD_AUTHOR.classList.add('book-card__author');
+  BOOK_CARD_AUTHOR.textContent = addedBook.author;
+  BOOK_CARD.appendChild(BOOK_CARD_AUTHOR);
+  const BOOK_CARD_STATUS = document.createElement('div'); // add book status div
+  BOOK_CARD_STATUS.classList.add('book-card__status');
+  if (bookStatus === true) {
+    BOOK_CARD_STATUS.textContent = 'Read';
+    BOOK_CARD_STATUS.classList.add('read');
+    } else {
+    BOOK_CARD_STATUS.textContent = 'Not read';
+  }
+  BOOK_CARD.appendChild(BOOK_CARD_STATUS);
+  form.title.value = '';
+  form.author.value = '';
+  closeModal();
+  toggleBookStatus();
+}
+
+let toggleBookStatus = function () {
+  bookStatusButton = document.querySelectorAll('.book-card__status');
+  for (let i = 0; i < bookStatusButton.length; i++) {
+    bookStatusButton[i].addEventListener('click', function () {
+      this.classList.toggle('read');
+      if (this.textContent === 'Read') {
+        this.textContent = 'Not read';
+      } else if (this.textContent === 'Not read') {
+        this.textContent = 'Read';
+      }
+    });
+  } 
+};
+
+
+
+
+
+//Quick test setup
+const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'read');
+const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'not read');
+const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'read');
+addBookToLibrary(SPIN);
+addBookToLibrary(THE_THIRD_POLICEMAN);
+addBookToLibrary(ALL_SYSTEMS_RED);
+
+
+
+
 // Create a book card for each item in array
-const updateLibrary = function () {
+/*const updateLibrary = function () {
   for (const Book of myLibrary) {
     const BOOK_CARD = document.createElement('div'); // create book card
     BOOK_CARD.classList.add('book-card');
@@ -64,60 +130,4 @@ const updateLibrary = function () {
     BOOK_CARD.appendChild(BOOK_CARD_STATUS);
   }
   toggleBookStatus();
-};
-
-// Get book data from the form,
-function getBookData (form) {
-  let bookTitle = form.title.value;
-  let bookAuthor = form.author.value;
-  let bookStatus = form.read.value;
-  let addedBook = new Book (bookTitle, bookAuthor, bookStatus);
-  myLibrary.push(addedBook);
-  form.title.value = '';
-  form.author.value = '';
-  closeModal();
-  const BOOK_CARD = document.createElement('div'); // create book card
-  BOOK_CARD.classList.add('book-card');
-  LIBRARY_CONTAINER.appendChild(BOOK_CARD);
-  const BOOK_CARD_TITLE = document.createElement('div'); // add book title div
-  BOOK_CARD_TITLE.classList.add('book-card__title');
-  BOOK_CARD_TITLE.textContent = addedBook.title;
-  BOOK_CARD.appendChild(BOOK_CARD_TITLE);
-  const BOOK_CARD_AUTHOR = document.createElement('div'); // add book title div
-  BOOK_CARD_AUTHOR.classList.add('book-card__author');
-  BOOK_CARD_AUTHOR.textContent = addedBook.author;
-  BOOK_CARD.appendChild(BOOK_CARD_AUTHOR);
-  const BOOK_CARD_STATUS = document.createElement('div'); // add book status div
-  BOOK_CARD_STATUS.classList.add('book-card__status');
-  if (Book.status === 'read') {
-    BOOK_CARD_STATUS.classList.add('read');
-    } else {
-    BOOK_CARD_STATUS.classList.add('not-read');
-  }
-  BOOK_CARD_STATUS.textContent = addedBook.status;
-  BOOK_CARD.appendChild(BOOK_CARD_STATUS);
-  toggleBookStatus();
-}
-
-let toggleBookStatus = function () {
-  let bookStatusButton = document.querySelectorAll('.book-card__status'); // toggle read status on click
-  for (let i = 0; i < bookStatusButton.length; i++) {
-    bookStatusButton[i].addEventListener('click', function () {
-      this.classList.toggle('read');
-      if (this.textContent === 'read') {
-        this.textContent = 'not read';
-      } else {
-        this.textContent = 'read';
-      }
-    });
-  }  
-};
-
-//Quick test setup
-const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'read');
-const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'not read');
-const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'read');
-addBookToLibrary(SPIN);
-addBookToLibrary(THE_THIRD_POLICEMAN);
-addBookToLibrary(ALL_SYSTEMS_RED);
-
+};*/
