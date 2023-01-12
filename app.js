@@ -81,11 +81,11 @@ function getBookData (form) {
   LIBRARY_CONTAINER.appendChild(BOOK_CARD);
   const BOOK_CARD_TITLE = document.createElement('div'); // add book title div
   BOOK_CARD_TITLE.classList.add('book-card__title');
-  BOOK_CARD_TITLE.textContent = Book.title;
+  BOOK_CARD_TITLE.textContent = addedBook.title;
   BOOK_CARD.appendChild(BOOK_CARD_TITLE);
   const BOOK_CARD_AUTHOR = document.createElement('div'); // add book title div
   BOOK_CARD_AUTHOR.classList.add('book-card__author');
-  BOOK_CARD_AUTHOR.textContent = Book.author;
+  BOOK_CARD_AUTHOR.textContent = addedBook.author;
   BOOK_CARD.appendChild(BOOK_CARD_AUTHOR);
   const BOOK_CARD_STATUS = document.createElement('div'); // add book status div
   BOOK_CARD_STATUS.classList.add('book-card__status');
@@ -94,8 +94,9 @@ function getBookData (form) {
     } else {
     BOOK_CARD_STATUS.classList.add('not-read');
   }
-  BOOK_CARD_STATUS.textContent = Book.status;
+  BOOK_CARD_STATUS.textContent = addedBook.status;
   BOOK_CARD.appendChild(BOOK_CARD_STATUS);
+  toggleBookStatus();
 }
 
 let toggleBookStatus = function () {
