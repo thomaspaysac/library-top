@@ -1,19 +1,20 @@
+// global variables definitions
 let myLibrary = [];
+let bookCard;
+let bookCardTitle;
+let bookCardAuthor;
+let bookCardStatus;
+let addedBook;
+let bookStatusButton;
+let bookTitle;
+let bookAuthor;
+let bookStatus;
 
 const ADD_BOOK_BUTTON = document.querySelector('.add-book__button');
 const BACKDROP = document.querySelector('.backdrop');
 const MODAL = document.querySelector('.new-book__modal');
 const LIBRARY_CONTAINER = document.getElementById('library-container');
 
-let BOOK_CARD;
-let BOOK_CARD_TITLE;
-let BOOK_CARD_AUTHOR;
-let BOOK_CARD_STATUS;
-let addedBook;
-let bookStatusButton;
-let bookTitle;
-let bookAuthor;
-let bookStatus;
 
 // basic functions to add books to myLibrary array and display library
 let Book = function (title, author, status) {
@@ -53,50 +54,49 @@ BACKDROP.addEventListener('click', () => closeModal());
 
 // DOM manipulation functions
 let createBookCard = function () {
-  BOOK_CARD = document.createElement('div'); // create book card
-  BOOK_CARD.classList.add('book-card');
-  LIBRARY_CONTAINER.appendChild(BOOK_CARD);
+  bookCard = document.createElement('div'); // create book card
+  bookCard.classList.add('book-card');
+  LIBRARY_CONTAINER.appendChild(bookCard);
 };
 
 let createBookTitle = function () {
-  BOOK_CARD_TITLE = document.createElement('div'); // add book title div
-  BOOK_CARD_TITLE.classList.add('book-card__title');
-  BOOK_CARD_TITLE.textContent = addedBook.title;
-  BOOK_CARD.appendChild(BOOK_CARD_TITLE);
+  bookCardTitle = document.createElement('div'); // add book title div
+  bookCardTitle.classList.add('book-card__title');
+  bookCardTitle.textContent = addedBook.title;
+  bookCard.appendChild(bookCardTitle);
 };
 
 let createBookAuthor = function () {
-  BOOK_CARD_AUTHOR = document.createElement('div'); // add book author div
-  BOOK_CARD_AUTHOR.classList.add('book-card__author');
-  BOOK_CARD_AUTHOR.textContent = addedBook.author;
-  BOOK_CARD.appendChild(BOOK_CARD_AUTHOR);
+  bookCardAuthor = document.createElement('div'); // add book author div
+  bookCardAuthor.classList.add('book-card__author');
+  bookCardAuthor.textContent = addedBook.author;
+  bookCard.appendChild(bookCardAuthor);
 };
 
 let createBookStatus = function () {
-  BOOK_CARD_STATUS = document.createElement('div'); // add book status div
-  BOOK_CARD_STATUS.classList.add('book-card__status');
+  bookCardStatus = document.createElement('div'); // add book status div
+  bookCardStatus.classList.add('book-card__status');
   if (bookStatus === true) {
-    BOOK_CARD_STATUS.textContent = 'Read';
-    BOOK_CARD_STATUS.classList.add('read');
+    bookCardStatus.textContent = 'Read';
+    bookCardStatus.classList.add('read');
     } else {
-    BOOK_CARD_STATUS.textContent = 'Not read';
+    bookCardStatus.textContent = 'Not read';
   }
-  BOOK_CARD.appendChild(BOOK_CARD_STATUS);
+  bookCard.appendChild(bookCardStatus);
 };
 
-let toggleBookStatus = function () {
-  bookStatusButton = document.querySelectorAll('.book-card__status');
-  for (let i = 0; i < bookStatusButton.length; i++) {
-    bookStatusButton[i].addEventListener('click', function () {
-      this.classList.toggle('read');
-      if (this.textContent === 'Read') {
-        this.textContent = 'Not read';
-      } else if (this.textContent === 'Not read') {
-        this.textContent = 'Read';
-      }
-    });
-  } 
-};
+// add toggle functionality for read/not read status
+document.addEventListener("click", function (e) {
+  const target = e.target.closest(".book-card__status");
+  if (target.textContent === 'Read') {
+    target.classList.remove('read');
+    target.textContent = 'Not read';
+  } else {
+    target.classList.add('read');
+    target.textContent = 'Read';
+  }
+});
+
 
 // Get book data from the form, then create a card for the book
 function getBookData (form) {
@@ -112,7 +112,7 @@ function getBookData (form) {
   form.title.value = ''; // clean-up stuff
   form.author.value = '';
   closeModal();
-  toggleBookStatus(); // update the array to allow toggling of read/not read
+  //toggleBookStatus(); // update the array to allow toggling of read/not read
 }
 
 
@@ -131,30 +131,46 @@ addBookToLibrary(ALL_SYSTEMS_RED);
 
 
 
+// TEMPORARY CODE
+
+/*let toggleBookStatus = function () {
+  bookStatusButton = document.querySelectorAll('.book-card__status');
+  for (let i = 0; i < bookStatusButton.length; i++) {
+    bookStatusButton[i].addEventListener('click', function () {
+      this.classList.toggle('read');
+      if (this.textContent === 'Read') {
+        this.textContent = 'Not read';
+      } else if (this.textContent === 'Not read') {
+        this.textContent = 'Read';
+      }
+    });
+  } 
+};*/
+
 
 // Create a book card for each item in array
 /*const updateLibrary = function () {
   for (const Book of myLibrary) {
-    const BOOK_CARD = document.createElement('div'); // create book card
-    BOOK_CARD.classList.add('book-card');
-    LIBRARY_CONTAINER.appendChild(BOOK_CARD);
-    const BOOK_CARD_TITLE = document.createElement('div'); // add book title div
-    BOOK_CARD_TITLE.classList.add('book-card__title');
-    BOOK_CARD_TITLE.textContent = Book.title;
-    BOOK_CARD.appendChild(BOOK_CARD_TITLE);
-    const BOOK_CARD_AUTHOR = document.createElement('div'); // add book title div
-    BOOK_CARD_AUTHOR.classList.add('book-card__author');
-    BOOK_CARD_AUTHOR.textContent = Book.author;
-    BOOK_CARD.appendChild(BOOK_CARD_AUTHOR);
-    const BOOK_CARD_STATUS = document.createElement('div'); // add book status div
-    BOOK_CARD_STATUS.classList.add('book-card__status');
+    const bookCard = document.createElement('div'); // create book card
+    bookCard.classList.add('book-card');
+    LIBRARY_CONTAINER.appendChild(bookCard);
+    const bookCardTitle = document.createElement('div'); // add book title div
+    bookCardTitle.classList.add('book-card__title');
+    bookCardTitle.textContent = Book.title;
+    bookCard.appendChild(bookCardTitle);
+    const bookCardAuthor = document.createElement('div'); // add book title div
+    bookCardAuthor.classList.add('book-card__author');
+    bookCardAuthor.textContent = Book.author;
+    bookCard.appendChild(bookCardAuthor);
+    const bookCardStatus = document.createElement('div'); // add book status div
+    bookCardStatus.classList.add('book-card__status');
     if (Book.status === 'read') {
-      BOOK_CARD_STATUS.classList.add('read');
+      bookCardStatus.classList.add('read');
       } else {
-      BOOK_CARD_STATUS.classList.add('not-read');
+      bookCardStatus.classList.add('not-read');
     }
-    BOOK_CARD_STATUS.textContent = Book.status;
-    BOOK_CARD.appendChild(BOOK_CARD_STATUS);
+    bookCardStatus.textContent = Book.status;
+    bookCard.appendChild(bookCardStatus);
   }
   toggleBookStatus();
 };*/
