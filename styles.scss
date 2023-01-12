@@ -1,0 +1,79 @@
+// Global stuff
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+// Backdrop and modal for adding new books
+.backdrop {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.455);
+  z-index: 2;
+}
+
+.new-book__modal {
+  display: none;
+  border: 1px solid black;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+// Library style
+#library-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+  gap: 1rem;
+}
+
+.book-card {
+  height: 300px;
+  padding: 8px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  border-left: 10px solid red;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+}
+
+.book-card__title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.book-card__status {
+  width: 80%;
+  text-align: center;
+  margin-top: auto;
+  justify-self: end;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.read {
+  background-color: rgba(0, 128, 0, 0.538);
+}
+
+.not-read {
+  background-color: rgba(255, 0, 0, 0.533);
+}
+
