@@ -6,6 +6,7 @@ let bookCardAuthor;
 let bookCardStatus;
 let addedBook;
 let bookStatusButton;
+let removeBookButton;
 let bookTitle;
 let bookAuthor;
 let bookStatus;
@@ -53,28 +54,28 @@ BACKDROP.addEventListener('click', () => closeModal());
 
 
 // DOM manipulation functions
-let createBookCard = function () {
-  bookCard = document.createElement('div'); // create book card
+let createBookCard = function () { // create book card
+  bookCard = document.createElement('div'); 
   bookCard.classList.add('book-card');
   LIBRARY_CONTAINER.appendChild(bookCard);
 };
 
-let createBookTitle = function () {
-  bookCardTitle = document.createElement('div'); // add book title div
+let createBookTitle = function () { // add book title div
+  bookCardTitle = document.createElement('div'); 
   bookCardTitle.classList.add('book-card__title');
   bookCardTitle.textContent = addedBook.title;
   bookCard.appendChild(bookCardTitle);
 };
 
-let createBookAuthor = function () {
-  bookCardAuthor = document.createElement('div'); // add book author div
+let createBookAuthor = function () { // add book author div
+  bookCardAuthor = document.createElement('div'); 
   bookCardAuthor.classList.add('book-card__author');
   bookCardAuthor.textContent = addedBook.author;
   bookCard.appendChild(bookCardAuthor);
 };
 
-let createBookStatus = function () {
-  bookCardStatus = document.createElement('div'); // add book status div
+let createBookStatus = function () { // add book status div
+  bookCardStatus = document.createElement('div'); 
   bookCardStatus.classList.add('book-card__status');
   if (bookStatus === true) {
     bookCardStatus.textContent = 'Read';
@@ -85,15 +86,30 @@ let createBookStatus = function () {
   bookCard.appendChild(bookCardStatus);
 };
 
+let createRemoveButton = function () {
+  removeBookButton = document.createElement('div'); // add remove button
+  removeBookButton.classList.add('book-card__remove');
+  removeBookButton.textContent = 'X';
+  bookCard.appendChild(removeBookButton);
+};
+
 // add toggle functionality for read/not read status
-document.addEventListener("click", function (e) {
-  const target = e.target.closest(".book-card__status");
+document.addEventListener('click', function (e) {
+  const target = e.target.closest('.book-card__status');
   if (target.textContent === 'Read') {
     target.classList.remove('read');
     target.textContent = 'Not read';
   } else {
     target.classList.add('read');
     target.textContent = 'Read';
+  }
+});
+
+document.addEventListener('click', function(e) {
+  const target = e.target.closest('.book-card__remove');
+  if (target) {
+    const parent = target.parentNode;
+    parent.remove();
   }
 });
 
@@ -109,8 +125,10 @@ function getBookData (form) {
   createBookTitle();
   createBookAuthor();
   createBookStatus();
+  createRemoveButton();
   form.title.value = ''; // clean-up stuff
   form.author.value = '';
+  form.status.checked = false;
   closeModal();
   //toggleBookStatus(); // update the array to allow toggling of read/not read
 }
