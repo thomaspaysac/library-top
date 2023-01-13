@@ -4,12 +4,14 @@ let bookCard;
 let bookCardTitle;
 let bookCardAuthor;
 let bookCardStatus;
+let bookCardRating;
 let addedBook;
 let bookStatusButton;
 let removeBookButton;
 let bookTitle;
 let bookAuthor;
 let bookStatus;
+let bookRating;
 
 const ADD_BOOK_BUTTON = document.querySelector('.add-book__button');
 const BACKDROP = document.querySelector('.backdrop');
@@ -18,10 +20,11 @@ const LIBRARY_CONTAINER = document.getElementById('library-container');
 
 
 // basic functions to add books to myLibrary array and display library
-let Book = function (title, author, status) {
+let Book = function (title, author, status, rating) {
   this.title = title,
   this.author = author,
   this.status = status,
+  this.rating = rating,
   this.info = function () {
     return `${title} is a book by ${author}. I have ${status} it.`;
   };
@@ -74,6 +77,15 @@ let createBookAuthor = function () { // add book author div
   bookCard.appendChild(bookCardAuthor);
 };
 
+let createBookRating = function () {
+  bookCardRating = document.createElement('div');
+  bookCardRating.classList.add('book-card__rating');
+  if (addedBook.rating !== undefined) {
+  bookCardRating.textContent = '★'.repeat(addedBook.rating);
+  }
+  bookCard.appendChild(bookCardRating);
+};
+
 let createBookStatus = function () { // add book status div
   bookCardStatus = document.createElement('div'); 
   bookCardStatus.classList.add('book-card__status');
@@ -93,6 +105,7 @@ let createRemoveButton = function () {
   bookCard.appendChild(removeBookButton);
 };
 
+
 // add toggle functionality for read/not read status
 document.addEventListener('click', function (e) {
   const target = e.target.closest('.book-card__status');
@@ -107,6 +120,13 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('click', function(e) {
   const target = e.target.closest('.book-card__remove');
+  const parent = target.parentNode; // get index of the book to remove it from array
+  const getTitle = (parent.firstChild).textContent;
+  console.log(getTitle);
+  const index = myLibrary.findIndex(object => {
+    return object.title === getTitle;
+  });
+  myLibrary.splice(index, 1);
   if (target) {
     const parent = target.parentNode;
     parent.remove();
@@ -119,55 +139,26 @@ function getBookData (form) {
   bookTitle = form.title.value;
   bookAuthor = form.author.value;
   bookStatus = form.status.checked;
-  addedBook = new Book (bookTitle, bookAuthor, bookStatus);
+  bookRating = form.rating.value;
+  addedBook = new Book (bookTitle, bookAuthor, bookStatus, bookRating);
   myLibrary.push(addedBook);
   createBookCard();
   createBookTitle();
   createBookAuthor();
+  createBookRating();
   createBookStatus();
   createRemoveButton();
   form.title.value = ''; // clean-up stuff
   form.author.value = '';
   form.status.checked = false;
+  form.rating.checked = false;
   closeModal();
-  //toggleBookStatus(); // update the array to allow toggling of read/not read
 }
 
 
-
-
-
-
-
-//Quick test setup
-const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'read');
-const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'not read');
-const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'read');
-addBookToLibrary(SPIN);
-addBookToLibrary(THE_THIRD_POLICEMAN);
-addBookToLibrary(ALL_SYSTEMS_RED);
-
-
-
-// TEMPORARY CODE
-
-/*let toggleBookStatus = function () {
-  bookStatusButton = document.querySelectorAll('.book-card__status');
-  for (let i = 0; i < bookStatusButton.length; i++) {
-    bookStatusButton[i].addEventListener('click', function () {
-      this.classList.toggle('read');
-      if (this.textContent === 'Read') {
-        this.textContent = 'Not read';
-      } else if (this.textContent === 'Not read') {
-        this.textContent = 'Read';
-      }
-    });
-  } 
-};*/
-
-
 // Create a book card for each item in array
-/*const updateLibrary = function () {
+const updateLibrary = function () {
+  LIBRARY_CONTAINER.innerHTML = '';
   for (const Book of myLibrary) {
     const bookCard = document.createElement('div'); // create book card
     bookCard.classList.add('book-card');
@@ -180,15 +171,32 @@ addBookToLibrary(ALL_SYSTEMS_RED);
     bookCardAuthor.classList.add('book-card__author');
     bookCardAuthor.textContent = Book.author;
     bookCard.appendChild(bookCardAuthor);
-    const bookCardStatus = document.createElement('div'); // add book status div
+    bookCardRating = document.createElement('div');
+    bookCardRating.classList.add('book-card__rating');
+    bookCardRating.textContent = '★'.repeat(Book.rating);
+    bookCard.appendChild(bookCardRating);
+    bookCardStatus = document.createElement('div'); 
     bookCardStatus.classList.add('book-card__status');
-    if (Book.status === 'read') {
-      bookCardStatus.classList.add('read');
-      } else {
-      bookCardStatus.classList.add('not-read');
+    if (Book.status === 'Read') {
+    bookCardStatus.textContent = 'Read';
+    bookCardStatus.classList.add('read');
+    } else {
+    bookCardStatus.textContent = 'Not read';
     }
-    bookCardStatus.textContent = Book.status;
     bookCard.appendChild(bookCardStatus);
-  }
-  toggleBookStatus();
-};*/
+    removeBookButton = document.createElement('div'); // add remove button
+    removeBookButton.classList.add('book-card__remove');
+    removeBookButton.textContent = 'X';
+    bookCard.appendChild(removeBookButton);  }
+};
+
+
+
+
+//Quick test setup
+const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'Read', '3');
+const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'Not read');
+const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'Read', '1');
+addBookToLibrary(SPIN);
+addBookToLibrary(THE_THIRD_POLICEMAN);
+addBookToLibrary(ALL_SYSTEMS_RED);

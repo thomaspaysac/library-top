@@ -1,3 +1,8 @@
+// Variables
+$colors: (background: #EFEAE2, accent: #2E5041, main: #9e52459f, secondary: #c2836493);
+$header-height: 4rem;
+$footer-height: 3rem;
+
 // Global stuff
 * {
   font-family: 'Poppins', sans-serif;
@@ -9,6 +14,48 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
+}
+
+body {
+  position: relative;
+}
+
+header {
+  width: 100%;
+  height: $header-height;
+  background-color: map-get($colors, accent);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  position: fixed;
+  top: 0;
+
+  z-index: 10;
+
+  button {
+    padding: 0.5rem;
+    color: white;
+    border: 3px solid white;
+    border-radius: 5px;
+    background-color: map-get($colors, secondary);
+  }
+}
+
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+  bottom: 0;
+
+  a {
+    color: white;
+  }
 }
 
 // Backdrop and modal for adding new books
@@ -23,7 +70,9 @@ textarea {
 
 .new-book__modal {
   display: none;
-  border: 1px solid black;
+  padding: 2rem;
+  border: 5px solid map-get($colors, accent);
+  border-radius: 5px;
   background-color: white;
   position: fixed;
   top: 50%;
@@ -34,18 +83,22 @@ textarea {
 
 // Library style
 #library-container {
+  min-height: 100vh;
+  padding: 3rem 5rem;
+  padding-top: $footer-height + 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
-  gap: 1rem;
+  gap: 2rem;
+  background-color: map-get($colors, background);
 }
 
 .book-card {
   position: relative;
   height: 300px;
-  padding: 20px 8px;
-  background-color: lightgrey;
+  padding: 25px 8px;
+  background-color: map-get($colors, secondary);
   border: 1px solid grey;
-  border-left: 10px solid red;
+  border-left: 10px solid map-get($colors, main);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -53,8 +106,10 @@ textarea {
   align-items: center;
   align-content: center;
   gap: 8px;
-  box-shadow:4px 2px 2px white,
-              2px 1px 1px black;
+  box-shadow: 2px 0px white,
+              4px 0px lightgrey,
+              6px 0px white,
+              8px 0px lightgrey;
 }
 
 .book-card__title {
@@ -77,6 +132,14 @@ textarea {
   border-radius: 5px;
 }
 
+.book-card__rating {
+  font-size: 2rem;
+  color: gold;
+  -webkit-text-fill-color: gold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
 .book-card__remove {
   position: absolute;
   top: 5px;
@@ -95,4 +158,25 @@ textarea {
 
 .read {
   background-color: rgba(0, 128, 0, 0.538);
+}
+
+// Form stuff
+form input {
+  display: block;
+  margin-bottom: 20px;
+}
+
+form input[type="checkbox"] {
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+form input[type="radio"] {
+  display: inline-block;
+}
+
+form input[type="button"] {
+  margin: 3rem auto 0 auto;
+  color: white;
+  background-color: green;
 }
