@@ -132,7 +132,7 @@ document.addEventListener('click', function (e) { // Toggle read status
   }
 });
 
-document.addEventListener('click', function(e) { // Remove the book from the array when delete button is clicked
+document.addEventListener('click', function (e) { // Remove the book from the array when delete button is clicked
   const target = e.target.closest('.book-card__remove');
   const parent = target.parentNode; // Get index of the book to remove it from array
   const getTitle = (parent.firstChild).textContent;
@@ -146,7 +146,7 @@ document.addEventListener('click', function(e) { // Remove the book from the arr
   }
 });
 
-document.addEventListener('click', function(e) { // Edit existing book
+document.addEventListener('click', function (e) { // Edit existing book
   const target = e.target.closest('.book-card__edit');
   target.addEventListener('click', openEditModal());
   const parent = target.parentNode;
@@ -155,8 +155,22 @@ document.addEventListener('click', function(e) { // Edit existing book
     return object.title === getTitle;
   });
   existingBookInfo = myLibrary[index];
-  editBookData(editForm);
+  writeExistingBookData(editForm);
 });
+
+function writeExistingBookData (form) {
+  form.title.value = existingBookInfo.title;
+  form.author.value = existingBookInfo.author;
+  form.rating.value = existingBookInfo.rating;
+}
+
+function editBookData(form) {
+  existingBookInfo.title = form.title.value; // Update array object
+  existingBookInfo.author = form.author.value;
+  existingBookInfo.rating = form.rating.value;
+  updateLibrary();
+  closeModal();
+}
 
 // Get book data from the form, then create a card for the book
 function getBookData (form) {
@@ -180,11 +194,7 @@ function getBookData (form) {
   closeModal();
 }
 
-function editBookData (form) {
-  form.title.value = existingBookInfo.title;
-  form.author.value = existingBookInfo.author;
-  form.rating.value = existingBookInfo.rating;
-}
+
 
 // Create a book card for each item in array
 const updateLibrary = function () {
@@ -233,3 +243,5 @@ const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'Read', '1'
 addBookToLibrary(SPIN);
 addBookToLibrary(THE_THIRD_POLICEMAN);
 addBookToLibrary(ALL_SYSTEMS_RED);
+
+updateLibrary();
