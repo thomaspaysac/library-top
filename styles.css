@@ -89,6 +89,7 @@ footer {
   position: relative;
   height: 300px;
   padding: 25px 8px;
+  padding-bottom: 35px;
   background-color: #c2836493;
   border: 1px solid grey;
   border-left: 10px solid #9e52459f;
@@ -100,6 +101,8 @@ footer {
   align-content: center;
   gap: 8px;
   box-shadow: 2px 0px white, 4px 0px lightgrey, 6px 0px white, 8px 0px lightgrey; }
+  .book-card:has(> .read) {
+    border-color: rgba(0, 128, 0, 0.538); }
 
 .book-card__title {
   font-weight: bold;
@@ -127,19 +130,24 @@ footer {
   -webkit-text-stroke-color: black; }
 
 .book-card__remove {
+  background-image: url("./images/delete-icon.svg");
   position: absolute;
   bottom: 5px;
   right: 5px;
-  height: 16px;
-  width: 16px;
-  color: white;
-  font-size: 1rem;
-  background-color: rgba(255, 0, 0, 0.533);
-  border: none;
-  border-radius: 33%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+  height: 20px;
+  width: 20px; }
+  .book-card__remove:hover {
+    transform: scale(1.2); }
+
+.book-card__edit {
+  background-image: url("./images/edit-icon.svg");
+  position: absolute;
+  bottom: 5px;
+  right: 35px;
+  height: 20px;
+  width: 20px; }
+  .book-card__edit:hover {
+    transform: scale(1.2); }
 
 .read {
   background-color: rgba(0, 128, 0, 0.538); }

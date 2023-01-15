@@ -8,6 +8,7 @@ let bookCardRating;
 let addedBook;
 let bookStatusButton;
 let removeBookButton;
+let editBookButton;
 let bookTitle;
 let bookAuthor;
 let bookStatus;
@@ -98,11 +99,16 @@ let createBookStatus = function () { // add book status div
   bookCard.appendChild(bookCardStatus);
 };
 
-let createRemoveButton = function () {
-  removeBookButton = document.createElement('div'); // add remove button
+let createRemoveButton = function () { // add remove book button
+  removeBookButton = document.createElement('div'); 
   removeBookButton.classList.add('book-card__remove');
-  removeBookButton.textContent = 'X';
   bookCard.appendChild(removeBookButton);
+};
+
+let createEditButton = function () { // add edit book button
+  editBookButton = document.createElement('div'); 
+  editBookButton.classList.add('book-card__edit');
+  bookCard.appendChild(editBookButton);
 };
 
 
@@ -148,6 +154,7 @@ function getBookData (form) {
   createBookRating();
   createBookStatus();
   createRemoveButton();
+  createEditButton();
   form.title.value = ''; // clean-up stuff
   form.author.value = '';
   form.status.checked = false;
@@ -186,8 +193,11 @@ const updateLibrary = function () {
     bookCard.appendChild(bookCardStatus);
     removeBookButton = document.createElement('div'); // add remove button
     removeBookButton.classList.add('book-card__remove');
-    removeBookButton.textContent = 'X';
-    bookCard.appendChild(removeBookButton);  }
+    bookCard.appendChild(removeBookButton);
+    editBookButton = document.createElement('div'); 
+    editBookButton.classList.add('book-card__edit');
+    bookCard.appendChild(editBookButton);  
+  }
 };
 
 
