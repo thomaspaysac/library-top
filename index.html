@@ -17,13 +17,14 @@
 
 <body>
   <div class="backdrop"></div>
+
   <div class="new-book__modal">
-    <h2>Add a new Book</h2>
+    <h2>+ Add a new Book</h2>
     <form name="bookForm" action="" method="get">
       <label for="book-title">Title</label>
-      <input type="text" name="title" id="book-title" value="" required>
+      <input type="text" name="title" id="book-title" value="">
       <label for="book-author">Author</label>
-      <input type="text" name="author" id="book-author" value="" required>
+      <input type="text" name="author" id="book-author" value="">
       <label for="read">Have you read it?</label>
       <input type="checkbox" name="status" id="status">
       <fieldset>
@@ -34,16 +35,38 @@
         <label for="rating-two">★★</label>
         <input type="radio" id="rating-three" name="rating" value="3">
         <label for="rating-three">★★★</label>
-        <input type="radio" id="rating-null" name="rating">
+        <input type="radio" id="rating-null" name="rating" value="0">
         <label for="rating-null">No rating</label>
       </fieldset>
       <input type="button" onClick="getBookData(bookForm)" value="Add new book">
     </form>
   </div>
 
+  <div class="edit-book__modal">
+    <h2><img src="./images/edit-icon.svg" alt="" class="icon"> Edit entry</h2>
+    <form name="editForm" action="" method="get">
+      <label for="book-title">Title</label>
+      <input type="text" name="title" id="book-title" value="">
+      <label for="book-author">Author</label>
+      <input type="text" name="author" id="book-author" value="">
+      <fieldset>
+        <legend>Rating:</legend>
+        <input type="radio" id="rating-one" name="rating" value="1">
+        <label for="rating-one">★</label>
+        <input type="radio" id="rating-two" name="rating" value="2">
+        <label for="rating-two">★★</label>
+        <input type="radio" id="rating-three" name="rating" value="3">
+        <label for="rating-three">★★★</label>
+        <input type="radio" id="rating-null" name="rating" value="0">
+        <label for="rating-null">No rating</label>
+      </fieldset>
+      <input type="button" onClick="editBookData(editForm)" value="Add new book">
+    </form>
+  </div>
+
   <header>
-    <h1 class="website-logo"><img src="./images/logo.svg" alt="" class="icon">LIBRI</h1>
-    <button class="add-book__button">+ Add a new book</button>
+    <h1 class="website-logo"><img src="./images/logo.svg" alt="" class="logo-icon">LIBRI</h1>
+    <button class="add-book__button"><img src="./images/plus-circle-icon.svg" alt="" class="icon">Add a new book</button>
   </header>
 
   <main>
@@ -52,7 +75,7 @@
         <div class="book-card__title">Titre à rallonge pour tester</div>
         <div class="book-card__author">Auteur</div>
         <div class="book-card__status read">Read</div>
-        <div class="book-card__rating"></div>
+        <div class="book-card__rating">0</div>
         <div class="book-card__edit"></div>
         <div class="book-card__remove"></div>
       </div>

@@ -13,10 +13,12 @@ let bookTitle;
 let bookAuthor;
 let bookStatus;
 let bookRating;
+let existingBookInfo;
 
 const ADD_BOOK_BUTTON = document.querySelector('.add-book__button');
 const BACKDROP = document.querySelector('.backdrop');
-const MODAL = document.querySelector('.new-book__modal');
+const ADD_BOOK_MODAL = document.querySelector('.new-book__modal');
+const EDIT_BOOK_MODAL = document.querySelector('.edit-book__modal');
 const LIBRARY_CONTAINER = document.getElementById('library-container');
 
 
@@ -45,15 +47,21 @@ for (const Book of myLibrary) {
 // Open add book form and visuals
 const closeModal = () => {
   BACKDROP.style.display = 'none';
-  MODAL.style.display = 'none';
+  ADD_BOOK_MODAL.style.display = 'none';
+  EDIT_BOOK_MODAL.style.display = 'none';
 };
 
-const openModal = () => {
+const openAddModal = () => {
   BACKDROP.style.display = 'block';
-  MODAL.style.display = 'block';
+  ADD_BOOK_MODAL.style.display = 'block';
 };
 
-ADD_BOOK_BUTTON.addEventListener('click', () => openModal());
+const openEditModal = () => {
+  BACKDROP.style.display = 'block';
+  EDIT_BOOK_MODAL.style.display = 'block';
+};
+
+ADD_BOOK_BUTTON.addEventListener('click', () => openAddModal());
 BACKDROP.addEventListener('click', () => closeModal());
 
 
@@ -112,8 +120,8 @@ let createEditButton = function () { // add edit book button
 };
 
 
-// add toggle functionality for read/not read status
-document.addEventListener('click', function (e) {
+// Actions functions
+document.addEventListener('click', function (e) { // Toggle read status
   const target = e.target.closest('.book-card__status');
   if (target.textContent === 'Read') {
     target.classList.remove('read');
@@ -124,21 +132,31 @@ document.addEventListener('click', function (e) {
   }
 });
 
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function(e) { // Remove the book from the array when delete button is clicked
   const target = e.target.closest('.book-card__remove');
-  const parent = target.parentNode; // get index of the book to remove it from array
+  const parent = target.parentNode; // Get index of the book to remove it from array
   const getTitle = (parent.firstChild).textContent;
-  console.log(getTitle);
   const index = myLibrary.findIndex(object => {
     return object.title === getTitle;
   });
-  myLibrary.splice(index, 1);
+  myLibrary.splice(index, 1);  // Remove the book from myLibrary array
   if (target) {
     const parent = target.parentNode;
-    parent.remove();
+    parent.remove();  // Remove the card from the DOM
   }
 });
 
+document.addEventListener('click', function(e) { // Edit existing book
+  const target = e.target.closest('.book-card__edit');
+  target.addEventListener('click', openEditModal());
+  const parent = target.parentNode;
+  const getTitle = (parent.firstChild).textContent;
+  const index = myLibrary.findIndex(object => {
+    return object.title === getTitle;
+  });
+  existingBookInfo = myLibrary[index];
+  editBookData(editForm);
+});
 
 // Get book data from the form, then create a card for the book
 function getBookData (form) {
@@ -162,6 +180,11 @@ function getBookData (form) {
   closeModal();
 }
 
+function editBookData (form) {
+  form.title.value = existingBookInfo.title;
+  form.author.value = existingBookInfo.author;
+  form.rating.value = existingBookInfo.rating;
+}
 
 // Create a book card for each item in array
 const updateLibrary = function () {
@@ -205,7 +228,7 @@ const updateLibrary = function () {
 
 //Quick test setup
 const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'Read', '3');
-const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'Not read');
+const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'Not read', '0');
 const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'Read', '1');
 addBookToLibrary(SPIN);
 addBookToLibrary(THE_THIRD_POLICEMAN);

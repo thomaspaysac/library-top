@@ -16,13 +16,14 @@ header {
   height: 4rem;
   background-color: #2E5041;
   color: white;
+  box-shadow: 2px 2px 5px #3333337c;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
   position: fixed;
   top: 0;
-  z-index: 10; }
+  z-index: 2; }
   header h1 {
     vertical-align: middle; }
   header button {
@@ -32,6 +33,11 @@ header {
     border-radius: 5px;
     background-color: #c2836493; }
 
+.add-book__button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; }
+
 .website-logo {
   font-family: 'Comfortaa', sans-serif;
   font-weight: bold;
@@ -40,10 +46,14 @@ header {
   display: flex;
   align-items: center; }
 
-.icon {
+.logo-icon {
   height: 3rem;
   width: 3rem;
   margin-right: 0.5rem; }
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem; }
 
 footer {
   background-color: black;
@@ -62,9 +72,21 @@ footer {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.455);
-  z-index: 2; }
+  z-index: 3; }
 
 .new-book__modal {
+  display: none;
+  padding: 2rem;
+  border: 5px solid #2E5041;
+  border-radius: 5px;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; }
+
+.edit-book__modal {
   display: none;
   padding: 2rem;
   border: 5px solid #2E5041;
@@ -118,7 +140,7 @@ footer {
   text-align: center;
   justify-self: end;
   border: 1px solid grey;
-  background-color: rgba(255, 0, 0, 0.533);
+  background-color: #9e52459f;
   border-radius: 5px; }
 
 .book-card__rating {
