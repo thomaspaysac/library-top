@@ -20,7 +20,12 @@ const BACKDROP = document.querySelector('.backdrop');
 const ADD_BOOK_MODAL = document.querySelector('.new-book__modal');
 const EDIT_BOOK_MODAL = document.querySelector('.edit-book__modal');
 const LIBRARY_CONTAINER = document.getElementById('library-container');
+const EMPTY_LIBRARY_MESSAGE = document.querySelector('.empty-library__box');
 
+// Page setup
+if (myLibrary.length !== 0) {
+  EMPTY_LIBRARY_MESSAGE.style.display = 'none';
+}
 
 // basic functions to add books to myLibrary array and display library
 let Book = function (title, author, status, rating) {
@@ -63,6 +68,12 @@ const openEditModal = () => {
 
 ADD_BOOK_BUTTON.addEventListener('click', () => openAddModal());
 BACKDROP.addEventListener('click', () => closeModal());
+
+let emptyLibraryMessage = function () {
+  if (myLibrary.length === 0) {
+    console.log('empty');
+  }
+};
 
 
 // DOM manipulation functions
@@ -140,6 +151,9 @@ document.addEventListener('click', function (e) { // Remove the book from the ar
     return object.title === getTitle;
   });
   myLibrary.splice(index, 1);  // Remove the book from myLibrary array
+  if (myLibrary.length === 0) {
+    EMPTY_LIBRARY_MESSAGE.style.display = 'block';
+    }
   if (target) {
     const parent = target.parentNode;
     parent.remove();  // Remove the card from the DOM
@@ -187,6 +201,9 @@ function getBookData (form) {
   createBookStatus();
   createRemoveButton();
   createEditButton();
+  if (myLibrary.length !== 0) {
+  EMPTY_LIBRARY_MESSAGE.style.display = 'none';
+  }
   form.title.value = ''; // clean-up stuff
   form.author.value = '';
   form.status.checked = false;
@@ -237,11 +254,9 @@ const updateLibrary = function () {
 
 
 //Quick test setup
-const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'Read', '3');
+/*const SPIN = new Book ('Spin', 'Robert Charles Wilson', 'Read', '3');
 const THE_THIRD_POLICEMAN = new Book ('The Third Policeman', 'Flann O\'Brien', 'Not read', '0');
 const ALL_SYSTEMS_RED = new Book ('All Systems Red', 'Martha Wells', 'Read', '1');
 addBookToLibrary(SPIN);
 addBookToLibrary(THE_THIRD_POLICEMAN);
-addBookToLibrary(ALL_SYSTEMS_RED);
-
-updateLibrary();
+addBookToLibrary(ALL_SYSTEMS_RED);*/
