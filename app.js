@@ -21,6 +21,8 @@ const ADD_BOOK_MODAL = document.querySelector('.new-book__modal');
 const EDIT_BOOK_MODAL = document.querySelector('.edit-book__modal');
 const LIBRARY_CONTAINER = document.getElementById('library-container');
 const EMPTY_LIBRARY_MESSAGE = document.querySelector('.empty-library__box');
+const REMOVE_BOOK_CONFIRM_MODAL = document.querySelector('.remove-book-confirm__modal');
+const REMOVE_BOOK_YES = document.querySelector('.remove-book__yes');
 
 // Page setup
 if (myLibrary.length !== 0) {
@@ -54,6 +56,7 @@ const closeModal = () => {
   BACKDROP.style.display = 'none';
   ADD_BOOK_MODAL.style.display = 'none';
   EDIT_BOOK_MODAL.style.display = 'none';
+  REMOVE_BOOK_CONFIRM_MODAL.style.display = 'none';
 };
 
 const openAddModal = () => {
@@ -202,7 +205,7 @@ function getBookData (form) {
   createRemoveButton();
   createEditButton();
   if (myLibrary.length !== 0) {
-  EMPTY_LIBRARY_MESSAGE.style.display = 'none';
+    EMPTY_LIBRARY_MESSAGE.style.display = 'none';
   }
   form.title.value = ''; // clean-up stuff
   form.author.value = '';

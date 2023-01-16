@@ -30,7 +30,7 @@ header {
     padding: 0.5rem;
     color: white;
     border: 3px solid white;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #c2836493; }
 
 .add-book__button {
@@ -110,16 +110,23 @@ footer {
 .empty-library__box {
   position: absolute;
   left: 50%;
-  top: 20%;
+  top: 33%;
   transform: translate(-50%, -20%);
   text-align: center;
-  font-size: 2rem;
-  color: #2E5041; }
+  font-size: 1.5rem;
+  color: #2E5041;
+  border: 3px solid #2E5041;
+  border-radius: 8px;
+  background-color: white;
+  padding: 16px; }
   .empty-library__box button {
+    font-size: 2rem;
     color: white;
     border: 3px solid white;
-    border-radius: 5px;
-    background-color: #90614ab4; }
+    padding: 0 16px;
+    border-radius: 8px;
+    background-color: #90614ab4;
+    margin-top: 16px; }
 
 .book-card {
   position: relative;

@@ -42,7 +42,7 @@ header {
     padding: 0.5rem;
     color: white;
     border: 3px solid white;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: map-get($colors, secondary);
   }
 }
@@ -137,17 +137,24 @@ footer {
 .empty-library__box {
   position: absolute;
   left: 50%;
-  top: 20%;
+  top: 33%;
   transform: translate(-50%, -20%);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: map-get($colors, accent);
+  border: 3px solid map-get($colors, accent);
+  border-radius: 8px;
+  background-color: white;
+  padding: 16px;
 
   button {
+    font-size: 2rem;
     color: white;
     border: 3px solid white;
-    border-radius: 5px;
+    padding: 0 16px;
+    border-radius: 8px;
     background-color: #90614ab4;
+    margin-top: 16px;
   }
 }
 
