@@ -61,6 +61,7 @@ const closeModal = () => {
 
 const openAddModal = () => {
   BACKDROP.style.display = 'block';
+  BACKDROP.style.opacity = '100';
   ADD_BOOK_MODAL.style.display = 'block';
 };
 

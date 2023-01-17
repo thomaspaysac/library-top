@@ -8,6 +8,9 @@ textarea {
   font-family: inherit;
   font-size: 100%; }
 
+button {
+  cursor: pointer; }
+
 body {
   position: relative; }
 
@@ -24,6 +27,10 @@ header {
   position: fixed;
   top: 0;
   z-index: 2; }
+  header a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Comfortaa', sans-serif; }
   header h1 {
     vertical-align: middle; }
   header button {
@@ -32,6 +39,13 @@ header {
     border: 3px solid white;
     border-radius: 8px;
     background-color: #c2836493; }
+    header button:hover, header button:active {
+      background-color: #9e52459f; }
+  @media (max-width: 40rem) {
+    header {
+      flex-direction: column;
+      height: 10rem;
+      justify-content: center; } }
 
 .add-book__button {
   display: flex;
@@ -59,6 +73,7 @@ footer {
   background-color: black;
   color: white;
   text-align: center;
+  height: 10vh;
   width: 100%;
   padding: 1rem 0;
   position: relative;
@@ -72,7 +87,9 @@ footer {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.455);
-  z-index: 3; }
+  z-index: 3;
+  opacity: 0;
+  transition: 2s; }
 
 .new-book__modal {
   display: none;
@@ -85,6 +102,9 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10; }
+  @media (max-width: 40rem) {
+    .new-book__modal {
+      width: 90%; } }
 
 .edit-book__modal {
   display: none;
@@ -97,15 +117,21 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10; }
+  @media (max-width: 40rem) {
+    .edit-book__modal {
+      width: 90%; } }
 
 #library-container {
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 3rem 5rem;
   padding-top: 6rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
   gap: 2rem;
   background-color: #EFEAE2; }
+  @media (max-width: 40rem) {
+    #library-container {
+      padding-top: 13rem; } }
 
 .empty-library__box {
   position: absolute;
@@ -127,6 +153,11 @@ footer {
     border-radius: 8px;
     background-color: #90614ab4;
     margin-top: 16px; }
+    .empty-library__box button:hover, .empty-library__box button:active {
+      background-color: #9e52459f; }
+  @media (max-width: 40rem) {
+    .empty-library__box {
+      width: 90%; } }
 
 .book-card {
   position: relative;
@@ -162,7 +193,8 @@ footer {
   justify-self: end;
   border: 1px solid grey;
   background-color: #9e52459f;
-  border-radius: 5px; }
+  border-radius: 5px;
+  cursor: pointer; }
 
 .book-card__rating {
   font-size: 2rem;
@@ -180,7 +212,8 @@ footer {
   height: 20px;
   width: 20px; }
   .book-card__remove:hover {
-    transform: scale(1.2); }
+    transform: scale(1.2);
+    cursor: pointer; }
 
 .book-card__edit {
   background-image: url("./images/edit-icon.svg");
@@ -190,7 +223,8 @@ footer {
   height: 20px;
   width: 20px; }
   .book-card__edit:hover {
-    transform: scale(1.2); }
+    transform: scale(1.2);
+    cursor: pointer; }
 
 .read {
   background-color: rgba(0, 128, 0, 0.538); }
@@ -198,6 +232,9 @@ footer {
 form input {
   display: block;
   margin-bottom: 20px; }
+
+form input[type="text"] {
+  width: 100%; }
 
 form input[type="checkbox"] {
   display: inline-block;
@@ -210,5 +247,9 @@ form input[type="button"] {
   margin: 3rem auto 0 auto;
   color: white;
   background-color: green; }
+  form input[type="button"]:hover, form input[type="button"]:active {
+    background-color: white;
+    color: green;
+    cursor: pointer; }
 
 /*# sourceMappingURL=styles.css.map */
