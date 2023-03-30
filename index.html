@@ -23,7 +23,7 @@
     <h2>+ Add a new Book</h2>
     <form name="bookForm" action="" method=preventDefault()>
       <label for="book-title">Title</label>
-      <input type="text" name="title" id="book-title" value="">
+      <input type="text" name="title" id="book-title" value="" required>
       <label for="book-author">Author</label>
       <input type="text" name="author" id="book-author" value="">
       <label for="read">Have you read it?</label>
@@ -39,7 +39,7 @@
         <input type="radio" id="rating-null" name="rating" value="0">
         <label for="rating-null">No rating</label>
       </fieldset>
-      <input type="button" onClick="getBookData(bookForm)" value="Add new book">
+      <input id="submit-book__button" type="button" onClick="getBookData(bookForm)" value="Add new book">
     </form>
   </div>
 

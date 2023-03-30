@@ -24,6 +24,10 @@ const EMPTY_LIBRARY_MESSAGE = document.querySelector('.empty-library__box');
 const REMOVE_BOOK_CONFIRM_MODAL = document.querySelector('.remove-book-confirm__modal');
 const REMOVE_BOOK_YES = document.querySelector('.remove-book__yes');
 
+// Form validation
+const form_book_title = document.getElementById('book-title');
+const SUBMIT_BOOK = document.getElementById('submit-book__button');
+
 // Page setup
 if (myLibrary.length !== 0) {
   EMPTY_LIBRARY_MESSAGE.style.display = 'none';
@@ -63,6 +67,7 @@ const openAddModal = () => {
   BACKDROP.style.display = 'block';
   BACKDROP.style.opacity = '100';
   ADD_BOOK_MODAL.style.display = 'block';
+  formValidation();
 };
 
 const openEditModal = () => {
@@ -70,7 +75,9 @@ const openEditModal = () => {
   EDIT_BOOK_MODAL.style.display = 'block';
 };
 
-ADD_BOOK_BUTTON.addEventListener('click', () => openAddModal());
+ADD_BOOK_BUTTON.addEventListener('click', () => {
+  openAddModal();
+  });
 BACKDROP.addEventListener('click', () => closeModal());
 
 let emptyLibraryMessage = function () {
@@ -192,7 +199,11 @@ function editBookData(form) {
 
 // Get book data from the form, then create a card for the book
 function getBookData (form) {
-  bookTitle = form.title.value;
+  if (form_book_title.validity.valueMissing) {
+    form_book_title.setCustomValidity('Please enter a title.');
+  } else {
+    bookTitle = form.title.value;
+  }
   bookAuthor = form.author.value;
   bookStatus = form.status.checked;
   bookRating = form.rating.value;
@@ -254,6 +265,17 @@ const updateLibrary = function () {
   }
 };
 
+
+const formValidation = () => {
+SUBMIT_BOOK.addEventListener('click', () => {
+  console.log(form_book_title.validity);
+  if (form_book_title.validity.valueMissing) {
+    form_book_title.setCustomValidity('Please enter a title.');
+  } else {
+    console.log('ok');
+  };
+  });
+};
 
 
 
